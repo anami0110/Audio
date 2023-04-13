@@ -36,7 +36,7 @@ file_path = "engine1.wav"
 sound_clip, sr = librosa.load(file_path, sr=None, mono=True)
 
 # Inicializar matriz de características
-features = np.zeros((1, 41, 79, 2))
+features = np.zeros((1, 41, 79, 2), dtype=np.float32)
 
 # Extraer características para cada ventana de audio
 for (start, end) in _windows(sound_clip, window_size):
@@ -52,7 +52,7 @@ for (start, end) in _windows(sound_clip, window_size):
 
 # Hacer predicción con el modelo
 #prediction = model.predict(features)
-interpreter.set_tensor(input_index, features)
+interpreter.set_tensor(input_index, features.astype(np.float32))
 interpreter.invoke()
 prediction = interpreter.get_tensor(output_index)
 
