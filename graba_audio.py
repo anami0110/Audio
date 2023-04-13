@@ -14,7 +14,7 @@ CHANNELS = 1
 RATE = 16000
 CHUNK = 1024
 RECORD_SECONDS = 5
-WAVE_OUTPUT_FILENAME = "grabacion.wav"
+WAVE_OUTPUT_FILENAME = "engine1.wav"
 
 # Inicializar PyAudio
 audio = pyaudio.PyAudio()
