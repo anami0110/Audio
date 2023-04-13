@@ -32,7 +32,7 @@ window_size = 512 * (frames - 1)
 bands = 60
 
 # Cargar archivo .wav
-file_path = "engine1.wav"
+file_path = "grabacion.wav"
 sound_clip, sr = librosa.load(file_path, sr=None, mono=True)
 
 # Inicializar matriz de características
