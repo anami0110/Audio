@@ -59,18 +59,19 @@ if opcion == "1":
     RATE = 44100
     RECORD_SECONDS = 5
     OUTPUT_FILENAME = "grabacion.wav"
-    DEVICE_INDEX = 0  # Índice del dispositivo de hardware (0,0)
+    DEVICE_NAME = "hw:0,0"  # Índice del dispositivo de hardware (0,0)
 
     # Inicializar PyAudio
     p = pyaudio.PyAudio()
 
     # Abrir el flujo de audio desde el dispositivo de hardware específico
+    DEVICE_INFO = p.get_device_info_by_host_api_device_index(0, p.get_device_info_by_index(0)["index"])
     stream = p.open(format=FORMAT,
-                    channels=CHANNELS,
-                    rate=RATE,
-                    input=True,
-                    frames_per_buffer=CHUNK,
-                    input_device_index=DEVICE_INDEX)
+                channels=CHANNELS,
+                rate=RATE,
+                input=True,
+                frames_per_buffer=CHUNK,
+                input_device_index=DEVICE_INFO["index"])
 
     print("Grabando audio...")
 
