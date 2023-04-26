@@ -65,7 +65,10 @@ if opcion == "1":
     p = pyaudio.PyAudio()
 
     # Abrir el flujo de audio desde el dispositivo de hardware específico
-  
+    # Comprobar si se admite el número de canales solicitado
+    if CHANNELS > DEVICE_INFO["maxInputChannels"]:
+        CHANNELS = DEVICE_INFO["maxInputChannels"]
+    print(f"Grabando con {CHANNELS} canal(es)"
     # Obtener información del dispositivo
     DEVICE_INFO = p.get_device_info_by_index(0)
     stream = p.open(format=FORMAT,
