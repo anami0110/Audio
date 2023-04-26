@@ -69,11 +69,13 @@ if opcion == "1":
     # Obtener información del dispositivo
     DEVICE_INFO = p.get_device_info_by_index(0)
     stream = p.open(format=FORMAT,
-                channels=1,
+                channels=CHANNELS,
                 rate=RATE,
                 input=True,
                 frames_per_buffer=CHUNK,
-                input_device_index=DEVICE_INFO["index"])
+                input_device_index=DEVICE_INFO["index"],
+                output_device_index=DEVICE_INFO["index"],
+                output_channels=CHANNELS)
 
     print("Grabando audio...")
 
