@@ -74,8 +74,7 @@ if opcion == "1":
                 input=True,
                 frames_per_buffer=CHUNK,
                 input_device_index=DEVICE_INFO["index"],
-                output_device_index=DEVICE_INFO["index"],
-                output_channels=CHANNELS)
+                input_channels=CHANNELS)
 
     print("Grabando audio...")
 
