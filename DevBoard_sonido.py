@@ -59,7 +59,7 @@ if opcion == "1":
     RATE = 44100
     RECORD_SECONDS = 5
     OUTPUT_FILENAME = "grabacion.wav"
-    DEVICE_NAME = "hw:0,0"  # Índice del dispositivo de hardware (0,0)
+    DEVICE_NAME = "edgetpu-audio-card:0" # Índice del dispositivo de hardware (0,0)
 
     # Inicializar PyAudio
     p = pyaudio.PyAudio()
@@ -77,8 +77,7 @@ if opcion == "1":
                 rate=RATE,
                 input=True,
                 frames_per_buffer=CHUNK,
-                input_device_index=DEVICE_INFO["index"],
-                input_channels=CHANNELS)
+                input_device_index=DEVICE_INFO["index"])
 
     print("Grabando audio...")
 
