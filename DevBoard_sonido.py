@@ -65,9 +65,11 @@ if opcion == "1":
     p = pyaudio.PyAudio()
 
     # Abrir el flujo de audio desde el dispositivo de hardware específico
-    DEVICE_INFO = p.get_device_info_by_host_api_device_index(0, p.get_device_info_by_index(0)["index"])
+  
+    # Obtener información del dispositivo
+    DEVICE_INFO = p.get_device_info_by_index(0)
     stream = p.open(format=FORMAT,
-                channels=CHANNELS,
+                channels=1,
                 rate=RATE,
                 input=True,
                 frames_per_buffer=CHUNK,
