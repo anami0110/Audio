@@ -33,7 +33,7 @@ frames=41
 window_size = 512 * (frames - 1)
 bands = 60
 
-while True
+while True:
     # Imprimir Menú
     # Imprimir el borde superior del menú
     print("╔" + "═" * 56 + "╗")
