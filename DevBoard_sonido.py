@@ -71,7 +71,8 @@ if opcion == "1":
     if CHANNELS > DEVICE_INFO["maxInputChannels"]:
         CHANNELS = DEVICE_INFO["maxInputChannels"]
     print(f"Grabando con {CHANNELS} canal(es)")
-
+    print("Using audio device '%s' for index %d" % (
+        DEVICE_INFO["name"], DEVICE_INFO["index"]))
     stream = p.open(format=FORMAT,
                 channels=CHANNELS,
                 rate=RATE,
