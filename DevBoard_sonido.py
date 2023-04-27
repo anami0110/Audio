@@ -226,6 +226,10 @@ while True:
             print("\n\n")
             elapsed_time = end_time - start_time
             print(f"Tiempo de ejecución (predicción del modelo): {elapsed_time} segundos\n\n")
+            
+            respuesta = input("Presione 9 para salir, o cualquier otra tecla para continuar: ")
+            if respuesta == "9":
+                break
     elif opcion =="0":
         print("\nFin del programa\n")
         break
