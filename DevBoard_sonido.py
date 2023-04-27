@@ -52,33 +52,25 @@ opcion = input("Seleccione una opción: ")
 
 # Realizar una acción en función de la opción seleccionada
 if opcion == "1":
-    # Configuración de la grabación de audio
+        # Configuración de la grabación de audio
     CHUNK = 1024
     FORMAT = pyaudio.paInt16
     CHANNELS = 1
     RATE = 44100
-    RECORD_SECONDS = 4
+    RECORD_SECONDS = 5
     OUTPUT_FILENAME = "grabacion.wav"
-    #DEVICE_NAME = "edgetpu-audio-card:0" # Índice del dispositivo de hardware (0,0)
+    DEVICE_INDEX = 0  # Índice del dispositivo de hardware (0,0)
 
     # Inicializar PyAudio
     p = pyaudio.PyAudio()
 
-    # Obtener información del dispositivo
-    DEVICE_INFO = p.get_device_info_by_index(7)
     # Abrir el flujo de audio desde el dispositivo de hardware específico
-    # Comprobar si se admite el número de canales solicitado
-    if CHANNELS > DEVICE_INFO["maxInputChannels"]:
-        CHANNELS = DEVICE_INFO["maxInputChannels"]
-    print(f"Grabando con {CHANNELS} canal(es)")
-    print("Using audio device '%s' for index %d" % (
-        DEVICE_INFO["name"], DEVICE_INFO["index"]))
     stream = p.open(format=FORMAT,
-                channels=CHANNELS,
-                rate=RATE,
-                input=True,
-                frames_per_buffer=CHUNK)
-                #input_device_index=DEVICE_INFO["index"])
+                    channels=CHANNELS,
+                    rate=RATE,
+                    input=True,
+                    frames_per_buffer=CHUNK,
+                    input_device_index=DEVICE_INDEX)
 
     print("Grabando audio...")
 
