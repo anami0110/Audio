@@ -139,8 +139,10 @@ while True:
         elapsed_time = end_time - start_time
         print(f"Tiempo de ejecución (predicción del modelo): {elapsed_time} segundos\n\n")
     elif opcion == "2":
+        count=0
         print("\nHa seleccionado la opción 2\n")
         while True:
+            count=count+1
              # Configuración de la grabación de audio
             CHUNK = 1024
             FORMAT = pyaudio.paInt16
@@ -227,9 +229,11 @@ while True:
             elapsed_time = end_time - start_time
             print(f"Tiempo de ejecución (predicción del modelo): {elapsed_time} segundos\n\n")
             
-            respuesta = input("Presione 9 para salir, o cualquier otra tecla para continuar: ")
-            if respuesta == "9":
-                break
+            if count==20:
+                count=0
+                respuesta = input("Presione 9 para salir, o cualquier otra tecla para continuar: ")
+                if respuesta == "9":
+                    break
     elif opcion =="0":
         print("\nFin del programa\n")
         break
