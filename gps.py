@@ -10,8 +10,12 @@ def obtener_ubicacion_gps():
         
         latitude = data['latitude']
         longitude = data['longitude']
+        country = data['country_name']
+        city = data['city']
+        region = data['region_name']
         
-        print(f'Ubicación GPS: {latitude}, {longitude}')
+        
+        print(f'Ubicación GPS: \n País: {country} \n Ciudad: {city}\n Region: {region} \n Latitud: {latitude}\n Longitud: {longitude}')
         
     except requests.exceptions.RequestException as e:
         print('Error al conectarse al servicio de geolocalización.')
