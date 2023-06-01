@@ -13,8 +13,8 @@ def get_location():
         "IP": ip_address,
         "Ciudad": response.get("city"),
         "Región": response.get("region"),
-        "País": response.get("country_name")
-        "Latitud": response.get("latitude")
+        "País": response.get("country_name"),
+        "Latitud": response.get("latitude"),
         "Longitud": response.get("longitude")
     }
     return location_data
