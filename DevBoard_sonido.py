@@ -6,12 +6,11 @@ Created on Wed Apr 12 21:01:29 2023
 
 import numpy as np
 import librosa
-#import tensorflow as tf
-#from tensorflow import keras
 import tflite_runtime.interpreter as tflite
-#from tflite_runtime.interpreter import Interpreter
 import pyaudio
 import wave
+from periphery import GPIO
+import requests
 import time
 
 # Cargar modelo previamente entrenado
@@ -32,6 +31,25 @@ def _windows(data, window_size):
 frames=41
 window_size = 512 * (frames - 1)
 bands = 60
+
+# Definir obtención de la IP
+def get_ip():
+    response = requests.get('https://api64.ipify.org?format=json').json()
+    return response["ip"]
+
+#Definir parámetros de ubicación
+def get_location():
+    ip_address = get_ip()
+    response = requests.get(f'https://ipapi.co/{ip_address}/json/').json()
+    location_data = {
+        "IP": ip_address,
+        "Ciudad": response.get("city"),
+        "Región": response.get("region"),
+        "País": response.get("country_name"),
+        "Latitud": response.get("latitude"),
+        "Longitud": response.get("longitude")
+    }
+    return location_data
 
 while True:
     # Imprimir Menú
@@ -130,17 +148,29 @@ while True:
         prediction = interpreter.get_tensor(output_index)
 
         # Imprimir etiqueta de la predicción
-        label_map = {0: 'Air', 1: 'carhorn', 2: 'children', 3: 'dog', 4: 'drilling', 5: 'engine',
-                     6: 'gun', 7: 'jack', 8: 'siren', 9:'street_music'} # mapeo de etiquetas a clases
+        label_map = {0: 'Aire_acondicionado', 1: 'Claxon', 2: 'Voces_de_niños', 3: 'Ladrido', 4: 'Taladradora', 5: 'Motor', 
+                     6: 'Disparo', 7: 'Martillo neumático', 8: 'Sirena', 9:'Música_callejera'} # mapeo de etiquetas a clases
         predicted_label = np.argmax(prediction)
         print('El archivo {} es de la clase {}'.format(file_path, label_map[predicted_label]))
         end_time = time.time()
         print("\n\n")
         elapsed_time = end_time - start_time
+        
+        # Imprimir el tiempo empleado en realizar la predicción del sonido detectado
         print(f"Tiempo de ejecución (predicción del modelo): {elapsed_time} segundos\n\n")
+        print("\n\n")
+        
+        # Imprimir la ubicación del sonido detectado
+        print(get_location())
+        print("\n\n")
+        
     elif opcion == "2":
         count=0
+        print("\n\n")
         print("\nHa seleccionado la opción 2\n")
+        print("\n\n")
+        # Pedir al usuario que ingrese las veces a repetir el bucle
+        veces = input("¿Cuántas veces desea repetir el bucle?: ")
         while True:
             count=count+1
              # Configuración de la grabación de audio
@@ -220,16 +250,23 @@ while True:
             prediction = interpreter.get_tensor(output_index)
 
             # Imprimir etiqueta de la predicción
-            label_map = {0: 'Air', 1: 'carhorn', 2: 'children', 3: 'dog', 4: 'drilling', 5: 'engine',
-                         6: 'gun', 7: 'jack', 8: 'siren', 9:'street_music'} # mapeo de etiquetas a clases
+            label_map = {0: 'Aire_acondicionado', 1: 'Claxon', 2: 'Voces_de_niños', 3: 'Ladrido', 4: 'Taladradora', 5: 'Motor',
+                         6: 'Disparo', 7: 'Martillo neumático', 8: 'Sirena', 9:'Música_callejera'} # mapeo de etiquetas a clases
             predicted_label = np.argmax(prediction)
             print('El archivo {} es de la clase {}'.format(file_path, label_map[predicted_label]))
             end_time = time.time()
             print("\n\n")
             elapsed_time = end_time - start_time
-            print(f"Tiempo de ejecución (predicción del modelo): {elapsed_time} segundos\n\n")
             
-            if count==20:
+            # Imprimir el tiempo empleado en realizar la predicción del sonido detectado
+            print(f"Tiempo de ejecución (predicción del modelo): {elapsed_time} segundos\n\n")
+            print("\n\n")
+            
+            # Imprimir la ubicación del sonido detectado
+            print(get_location())
+            print("\n\n")
+            
+            if count==veces:
                 count=0
                 respuesta = input("Presione 9 para salir, o cualquier otra tecla para continuar: ")
                 if respuesta == "9":
