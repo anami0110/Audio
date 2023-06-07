@@ -32,6 +32,122 @@ frames=41
 window_size = 512 * (frames - 1)
 bands = 60
 
+#Encendido de las luces LED
+def encender_luces(predicted_label):
+    rojo = GPIO("/dev/gpiochip0", 6, "out")  # pin 13
+    azul = GPIO("/dev/gpiochip2", 9, "out")  # pin 16
+    verde = GPIO("/dev/gpiochip4", 10, "out")  # pin 18
+    blanco = GPIO("/dev/gpiochip4", 12, "out")  # pin 22
+    amarillo = GPIO("/dev/gpiochip0", 7, "out")  # pin 29
+    if predicted_label == 0:
+        #Aire Acondicionado: Rojo, Verde, Amarillo
+        rojo.write(True)
+        verde.write(True)
+        amarillo.write(True)
+        time.sleep(3)
+        rojo.write(False)
+        verde.write(False)
+        amarillo.write(False)
+        rojo.close()
+        verde.close()
+        amarillo.close()
+    elif predicted_label == 1:
+        #Claxon: Azul, Blanco
+        azul.write(True)
+        blanco.write(True)
+        time.sleep(3)
+        azul.write(False)
+        blanco.write(False)
+        azul.close()
+        blanco.close()
+    elif predicted_label == 2:
+        #Niños: Rojo, Verde, Blanco
+        rojo.write(True)
+        verde.write(True)
+        blanco.write(True)
+        time.sleep(3)
+        rojo.write(False)
+        verde.write(False)
+        blanco.write(False)
+        rojo.close()
+        verde.close()
+        blanco.close()        
+     elif predicted_label == 3:
+        #Ladrido de perro: Rojo, Amarillo, Blanco
+        rojo.write(True)
+        amarillo.write(True)
+        blanco.write(True)
+        time.sleep(3)
+        rojo.write(False)
+        amarillo.write(False)
+        blanco.write(False)
+        rojo.close()
+        amarillo.close()
+        blanco.close() 
+     elif predicted_label == 4:
+        #Taladradora: Azul, Verde, Blanco
+        azul.write(True)
+        blanco.write(True)
+        verde.write(True)
+        time.sleep(3)
+        azul.write(False)
+        blanco.write(False)
+        verde.write(False)
+        azul.close()
+        blanco.close()
+        verde.close()
+      elif predicted_label == 5:
+        #Motor: Azul, Verde
+        azul.write(True)
+        verde.write(True)
+        time.sleep(3)
+        azul.write(False)
+        verde.write(False)
+        azul.close()
+        verde.close()
+     elif predicted_label == 6:
+        #Disparo: Rojo, Verde, Azul
+        rojo.write(True)
+        verde.write(True)
+        azul.write(True)
+        time.sleep(3)
+        rojo.write(False)
+        verde.write(False)
+        azul.write(False)
+        rojo.close()
+        verde.close()
+        azul.close()
+      elif predicted_label == 7:
+        #Martillo: Azul, Amarillo, Blanco
+        azul.write(True)
+        amarillo.write(True)
+        blanco.write(True)
+        time.sleep(3)
+        azul.write(False)
+        amarillo.write(False)
+        blanco.write(False)
+        azul.close()
+        amarillo.close()
+        blanco.close() 
+      elif predicted_label == 8:
+        #Sirena: Rojo, Amarillo
+        rojo.write(True)
+        amarillo.write(True)
+        time.sleep(3)
+        rojo.write(False)
+        amarillo.write(False)
+        rojo.close()
+        amarillo.close()
+       elif predicted_label == 9:
+        #Música Callejera: Blanco, Amarillo
+        blanco.write(True)
+        amarillo.write(True)
+        time.sleep(3)
+        blanco.write(False)
+        amarillo.write(False)
+        blanco.close()
+        amarillo.close()
+        
 # Definir obtención de la IP
 def get_ip():
     response = requests.get('https://api64.ipify.org?format=json').json()
@@ -152,6 +268,7 @@ while True:
                      6: 'Disparo', 7: 'Martillo neumático', 8: 'Sirena', 9:'Música_callejera'} # mapeo de etiquetas a clases
         predicted_label = np.argmax(prediction)
         print('El archivo {} es de la clase {}'.format(file_path, label_map[predicted_label]))
+        encender_luces(predicted_label)
         end_time = time.time()
         print("\n\n")
         elapsed_time = end_time - start_time
@@ -254,6 +371,7 @@ while True:
                          6: 'Disparo', 7: 'Martillo neumático', 8: 'Sirena', 9:'Música_callejera'} # mapeo de etiquetas a clases
             predicted_label = np.argmax(prediction)
             print('El archivo {} es de la clase {}'.format(file_path, label_map[predicted_label]))
+            encender_luces(predicted_label)
             end_time = time.time()
             print("\n\n")
             elapsed_time = end_time - start_time
