@@ -2,7 +2,7 @@ import time
 
 def contador_tiempo():
     # Establecer el tiempo límite en segundos
-    tiempo_limite = 600  # 10 minutos
+    tiempo_limite = 30  # 30 seg
 
     # Obtener el tiempo de inicio
     tiempo_inicio = time.time()
