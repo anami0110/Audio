@@ -72,7 +72,7 @@ def encender_luces(predicted_label):
         rojo.close()
         verde.close()
         blanco.close()        
-     elif predicted_label == 3:
+    elif predicted_label == 3:
         #Ladrido de perro: Rojo, Amarillo, Blanco
         rojo.write(True)
         amarillo.write(True)
@@ -84,7 +84,7 @@ def encender_luces(predicted_label):
         rojo.close()
         amarillo.close()
         blanco.close() 
-     elif predicted_label == 4:
+    elif predicted_label == 4:
         #Taladradora: Azul, Verde, Blanco
         azul.write(True)
         blanco.write(True)
@@ -96,7 +96,7 @@ def encender_luces(predicted_label):
         azul.close()
         blanco.close()
         verde.close()
-      elif predicted_label == 5:
+    elif predicted_label == 5:
         #Motor: Azul, Verde
         azul.write(True)
         verde.write(True)
@@ -105,7 +105,7 @@ def encender_luces(predicted_label):
         verde.write(False)
         azul.close()
         verde.close()
-     elif predicted_label == 6:
+    elif predicted_label == 6:
         #Disparo: Rojo, Verde, Azul
         rojo.write(True)
         verde.write(True)
@@ -117,7 +117,7 @@ def encender_luces(predicted_label):
         rojo.close()
         verde.close()
         azul.close()
-      elif predicted_label == 7:
+    elif predicted_label == 7:
         #Martillo: Azul, Amarillo, Blanco
         azul.write(True)
         amarillo.write(True)
@@ -129,7 +129,7 @@ def encender_luces(predicted_label):
         azul.close()
         amarillo.close()
         blanco.close() 
-      elif predicted_label == 8:
+    elif predicted_label == 8:
         #Sirena: Rojo, Amarillo
         rojo.write(True)
         amarillo.write(True)
@@ -138,7 +138,7 @@ def encender_luces(predicted_label):
         amarillo.write(False)
         rojo.close()
         amarillo.close()
-       elif predicted_label == 9:
+    elif predicted_label == 9:
         #Música Callejera: Blanco, Amarillo
         blanco.write(True)
         amarillo.write(True)
