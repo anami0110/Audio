@@ -275,8 +275,8 @@ while True:
         print("\n\n")
         
         # Imprimir la ubicación del sonido detectado
-        #print(get_location())
-        #print("\n\n")
+        print(get_location())
+        print("\n\n")
         
     elif opcion == "2":
         count=1
@@ -378,8 +378,8 @@ while True:
             print("\n\n")
             
             # Imprimir la ubicación del sonido detectado
-            #print(get_location())
-            #print("\n\n")
+            print(get_location())
+            print("\n\n")
             
        # if count==veces:
         count=1
