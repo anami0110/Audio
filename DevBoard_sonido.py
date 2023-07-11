@@ -288,7 +288,7 @@ while True:
         print("\n\n")
         # Pedir al usuario que ingrese las veces a repetir el bucle
         veces = input("¿Cuántas veces desea repetir el bucle?: ")
-        while True:
+        while count<=veces:
             count=count+1
              # Configuración de la grabación de audio
             CHUNK = 1024
