@@ -232,19 +232,15 @@ while True:
         wf.close()
 
         print(f"Grabación guardada en {OUTPUT_FILENAME}\n")
-
-        time.sleep(1)
-
-        print("\nContinuación del programa después de 1 segundos\n")
         
-        start_time=time.time()
+        
         # Cargar archivo .wav
         file_path = "grabacion.wav"
         sound_clip, sr = librosa.load(file_path, sr=None, mono=True)
 
         # Inicializar matriz de características
         features = np.zeros((1, 41, 79, 2), dtype=np.float32)
-
+        start_time=time.time()
         # Extraer características para cada ventana de audio
         for (start, end) in _windows(sound_clip, window_size):
             if len(sound_clip[start:end]) == window_size:
@@ -268,8 +264,9 @@ while True:
                      6: 'Disparo', 7: 'Martillo neumático', 8: 'Sirena', 9:'Música_callejera'} # mapeo de etiquetas a clases
         predicted_label = np.argmax(prediction)
         print('El archivo {} es de la clase {}'.format(file_path, label_map[predicted_label]))
-        encender_luces(predicted_label)
         end_time = time.time()
+        encender_luces(predicted_label)
+        
         print("\n\n")
         elapsed_time = end_time - start_time
         
@@ -336,11 +333,7 @@ while True:
 
             print(f"Grabación guardada en {OUTPUT_FILENAME}\n")
 
-            time.sleep(1)
-
-            print("\nContinuación del programa después de 1 segundos\n")
-
-            start_time=time.time()
+            
             # Cargar archivo .wav
             file_path = "grabacion.wav"
             sound_clip, sr = librosa.load(file_path, sr=None, mono=True)
@@ -348,6 +341,8 @@ while True:
             # Inicializar matriz de características
             features = np.zeros((1, 41, 79, 2), dtype=np.float32)
 
+            start_time=time.time()
+            
             # Extraer características para cada ventana de audio
             for (start, end) in _windows(sound_clip, window_size):
                 if len(sound_clip[start:end]) == window_size:
@@ -371,8 +366,10 @@ while True:
                          6: 'Disparo', 7: 'Martillo neumático', 8: 'Sirena', 9:'Música_callejera'} # mapeo de etiquetas a clases
             predicted_label = np.argmax(prediction)
             print('El archivo {} es de la clase {}'.format(file_path, label_map[predicted_label]))
-            encender_luces(predicted_label)
             end_time = time.time()
+            
+            encender_luces(predicted_label)
+            
             print("\n\n")
             elapsed_time = end_time - start_time
             
