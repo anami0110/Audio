@@ -282,13 +282,13 @@ while True:
         print("\n\n")
         
     elif opcion == "2":
-        count=0
+        count=1
         print("\n\n")
         print("\nHa seleccionado la opción 2\n")
         print("\n\n")
         # Pedir al usuario que ingrese las veces a repetir el bucle
-        veces = input("¿Cuántas veces desea repetir el bucle?: ")
-        while count<veces:
+        veces = int(input("¿Cuántas veces desea repetir el bucle?: "))
+        while count<=veces:
             count=count+1
              # Configuración de la grabación de audio
             CHUNK = 1024
@@ -384,11 +384,11 @@ while True:
             print(get_location())
             print("\n\n")
             
-            if count==veces:
-                count=0
-                respuesta = input("Presione 9 para salir, o cualquier otra tecla para continuar: ")
-                if respuesta == "9":
-                    break
+       # if count==veces:
+        count=1
+        respuesta = input("Presione 9 para salir, o cualquier otra tecla para continuar: ")
+        if respuesta == "9":
+            break
     elif opcion =="0":
         print("\nFin del programa\n")
         break
